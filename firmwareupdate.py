@@ -22,6 +22,21 @@ bios_release_r340 = "1.2.0"
 bios_filename_r340 = "BIOS_76NP7_WN64_1.2.0.EXE"
 bios_location_r340 = "/R340"
 
+# Given a chassis or idrac parameter, extract the release from the filename and path, returning both
+def get_firmware_filename(chassis):
+    for file in os.listdir(chassis):
+        if file.endswith(".EXE"):
+            if chassis in ["R640","R340"]:
+                mysplit=file.rsplit("_")
+                release = mysplit[-1]
+                release = release[:-4]
+                biospath = os.path.join(chassis,file)
+            if chassis == "IDRAC":
+                mysplit=file.rsplit("_")
+                release = mysplit[-2]
+                biospath = os.path.join(chassis,file)
+    return release,biospath
+
 # Check if iDRAC supportes the Assembly and Simple Update REDFISH schema
 def check_supported_idrac_version(idrac,username,password):
     response = requests.get('https://%s/redfish/v1/UpdateService' % idrac,verify=False,auth=(username,password))
@@ -160,30 +175,42 @@ def main():
 
     bios_upgrade = False
     idrac_upgrade = False
-    if (dellchassis in ["R640","R340"] and idracData[u'Attributes'][u'Info.1.Version'] < idrac_release):
-        print("Can be upgrade to iDRAC " + idrac_release)
+
+
+    # Get the BIOS release and idrac release
+    release,biospath = get_firmware_filename(dellchassis)
+    print("\nAvailable BIOS/iDRAC Release")
+    print("BIOS Release: ", release)
+    print("BIOS Path: ", biospath)
+    idracrelease,idracpath = get_firmware_filename("IDRAC")
+    print("BIOS Release: ", idracrelease)
+    print("BIOS Path: ", idracpath)
+
+    print("\nCurrent BIOS/iDRAC Release")
+    if (dellchassis in ["R640","R340"] and idracData[u'Attributes'][u'Info.1.Version'] < idracrelease):
+        print("Can be upgrade to iDRAC " + idracrelease)
         idrac_upgrade = True
-    elif (dellchassis in ["R640","R340"] and idracData[u'Attributes'][u'Info.1.Version'] == idrac_release):
+    elif (dellchassis in ["R640","R340"] and idracData[u'Attributes'][u'Info.1.Version'] == idracrelease):
         print("iDRAC version: " +idracData[u'Attributes'][u'Info.1.Version'] + " (CURRENT)")
-    if ((dellchassis == "R640" and (biosData[u'Attributes'][u'SystemBiosVersion'] < bios_release_r640))):
+    if ((dellchassis == "R640" and (biosData[u'Attributes'][u'SystemBiosVersion'] < release))):
         print("BIOS release: " +biosData[u'Attributes'][u'SystemBiosVersion'] + " (OLD)")
         print("BIOS release date: ", biosreleasedate)
-        print("Can be upgraded to BIOS " + bios_release_r640)
+        print("Can be upgraded to BIOS " + release)
         bios_upgrade = True
-    elif ((dellchassis == "R640" and (biosData[u'Attributes'][u'SystemBiosVersion'] == bios_release_r640))):
+    elif ((dellchassis == "R640" and (biosData[u'Attributes'][u'SystemBiosVersion'] == release))):
         print("BIOS release: " +biosData[u'Attributes'][u'SystemBiosVersion'] + " (CURRENT)")
         print("BIOS release date: ", biosreleasedate)
-    if ((dellchassis == "R340" and (biosData[u'Attributes'][u'SystemBiosVersion'] < bios_release_r340))):
+    if ((dellchassis == "R340" and (biosData[u'Attributes'][u'SystemBiosVersion'] < release))):
         print("BIOS release: " +biosData[u'Attributes'][u'SystemBiosVersion'] + " (OLD)")
         print("BIOS release date: ", biosreleasedate)
-        print("Can be upgraded to BIOS " + bios_release_r340)
+        print("Can be upgraded to BIOS " + release)
         bios_upgrade = True
-    elif ((dellchassis == "R340" and (biosData[u'Attributes'][u'SystemBiosVersion'] == bios_release_r340))):
+    elif ((dellchassis == "R340" and (biosData[u'Attributes'][u'SystemBiosVersion'] == release))):
         print("BIOS release: " +biosData[u'Attributes'][u'SystemBiosVersion'] + " (CURRENT)")
         print("BIOS release date: ", biosreleasedate)
 
     if idrac_upgrade:
-        x = input("Upload new IDRAC image?")
+        x = input("\nUpgrade to new IDRAC image?")
         x = x.lower()
         if x == "yes":
             upload_image_payload(idrac_filename, idrac_location, args.idrac, args.username, args.password)
@@ -192,7 +219,7 @@ def main():
             sys.exit()
 
     if bios_upgrade and dellchassis == "R340":
-        x = input("Upload new BIOS image?")
+        x = input("\nUpgrade to new BIOS image?")
         x = x.lower()
         if x == "yes":
             upload_image_payload(bios_filename_r340, bios_location_r340, args.idrac, args.username, args.password)
@@ -200,9 +227,8 @@ def main():
             print("Appliance rebooting and applying new BIOS firmware")
             sys.exit()
 
-
     if bios_upgrade and dellchassis == "R640":
-        x = input("Upload new BIOS image?")
+        x = input("\nUpgrade to new BIOS image?")
         x = x.lower()
         if x == "yes":
             upload_image_payload(bios_filename_r640, bios_location_r640, args.idrac, args.username, args.password)
