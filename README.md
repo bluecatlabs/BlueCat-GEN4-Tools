@@ -121,6 +121,21 @@ eth3           00-0A-F7-BF-AE-6D  LinkUp
 ```
 > NOTE :- IP Address and Network Mask will only be populated if the Dell iSM (iDRAC service module) is deployed and appliance is running
 
+# GEN4 Remote BIOS/idrac firmware update
+Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) can remotely update the BIOS and IDRAC firmware.
+
+## Usage
+
+```
+python3 firmwareupdate.py [-h] idrac username password
+
+idrac       IP Addresss of the GEN4 appliance iDRAC
+username    iDRAC username
+password    iDRAC password
+-h, --help  show this help message and exit
+```
+
+
 ## Contributing
 
 1. Fork it!
