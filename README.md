@@ -1,6 +1,6 @@
 ![alt text](logo.png "BlueCat Logo")
 
-Provides samples tools for remotely fingerprint BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
+Samples tools for remotely fingerprinting BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
 
 This is a community offering on BlueCat labs and as such it provided without support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
