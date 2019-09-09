@@ -1,5 +1,5 @@
 # _author_ = Brian Shorland <bshorland@bluecatnetworks.com>
-# _version_ = 1.02
+# _version_ = 1.03
 
 import sys
 import requests
