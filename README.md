@@ -131,12 +131,15 @@ Before running the firmwareupdate.py tool
 Create the following folders; IDRAC, R640 and R340 in the source directory where the tool in being run.
 
 Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
+
 [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
 
 Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
+
 [R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
 
 Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
+
 [iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
 
 ## Usage
