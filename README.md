@@ -125,24 +125,24 @@ eth3           00-0A-F7-BF-AE-6D  LinkUp
 # GEN4 Remote BIOS/idrac firmware update (firmwareupdate.py)
 Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) can remotely update the BIOS and IDRAC firmware.
 
-## Prerequists
+## Prerequisite
 Before running the firmwareupdate.py tool
 
-Create the following folders; IDRAC, R640 and R340 in the source directory where the tool in being run.
+1. Ensure the following folders are created in the source directory; IDRAC, R640 and R340 
 
-> NOTE :- When downloading the latest BIOS/iDRAC firmware always selects the .EXE version
-
-Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
+2. Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
 
 :arrow_down: [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
 
-Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
+3. Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
 
 :arrow_down: [R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
 
-Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
+4. Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
 
 :arrow_down: [iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
+
+> NOTE :- When downloading the latest BIOS/iDRAC firmware always selects the .EXE version
 
 ## Usage
 
