@@ -12,15 +12,15 @@ import subprocess
 
 urllib3.disable_warnings()
 
-idrac_release = "3.34.34.34"
-idrac_filename = "iDRAC-with-Lifecycle-Controller_Firmware_3HT97_WN64_3.34.34.34_A00.EXE"
-idrac_location = "/iDRAC"
-bios_release_r640 = "2.2.11"
-bios_filename_r640 = "BIOS_NM8WY_WN64_2.2.11.EXE"
-bios_location_r640 = "/R640"
-bios_release_r340 = "1.2.0"
-bios_filename_r340 = "BIOS_76NP7_WN64_1.2.0.EXE"
-bios_location_r340 = "/R340"
+# idrac_release = "3.34.34.34"
+# idrac_filename = "iDRAC-with-Lifecycle-Controller_Firmware_3HT97_WN64_3.34.34.34_A00.EXE"
+# idrac_location = "/iDRAC"
+# bios_release_r640 = "2.2.11"
+# bios_filename_r640 = "BIOS_NM8WY_WN64_2.2.11.EXE"
+# bios_location_r640 = "/R640"
+# bios_release_r340 = "1.2.0"
+# bios_filename_r340 = "BIOS_76NP7_WN64_1.2.0.EXE"
+# bios_location_r340 = "/R340"
 
 # Given a chassis or idrac parameter, extract the release from the filename and path, returning both
 def get_firmware_filename(chassis):
@@ -30,11 +30,11 @@ def get_firmware_filename(chassis):
                 mysplit=file.rsplit("_")
                 release = mysplit[-1]
                 release = release[:-4]
-                biospath = os.path.join(chassis,file)
+                biospath = file
             if chassis == "IDRAC":
                 mysplit=file.rsplit("_")
                 release = mysplit[-2]
-                biospath = os.path.join(chassis,file)
+                biospath = file
     return release,biospath
 
 # Check if iDRAC supportes the Assembly and Simple Update REDFISH schema
@@ -178,15 +178,16 @@ def main():
 
 
     # Get the BIOS release and idrac release
-    release,biospath = get_firmware_filename(dellchassis)
+    release,biosfile = get_firmware_filename(dellchassis)
     print("\nAvailable BIOS/iDRAC Release")
     print("BIOS Release: ", release)
-    print("BIOS Path: ", biospath)
-    idracrelease,idracpath = get_firmware_filename("IDRAC")
+    print("BIOS File: ", biosfile)
+    idracrelease,idracfile = get_firmware_filename("IDRAC")
     print("BIOS Release: ", idracrelease)
-    print("BIOS Path: ", idracpath)
+    print("BIOS File: ", idracfile)
 
     print("\nCurrent BIOS/iDRAC Release")
+
     if (dellchassis in ["R640","R340"] and idracData[u'Attributes'][u'Info.1.Version'] < idracrelease):
         print("Can be upgrade to iDRAC " + idracrelease)
         idrac_upgrade = True
@@ -213,7 +214,7 @@ def main():
         x = input("\nUpgrade to new IDRAC image?")
         x = x.lower()
         if x == "yes":
-            upload_image_payload(idrac_filename, idrac_location, args.idrac, args.username, args.password)
+            upload_image_payload(idracfile, "/IDRAC", args.idrac, args.username, args.password)
             install_image_payload(args.idrac, args.username, args.password)
             print("Appliance rebooting and applying new BIOS firmware")
             sys.exit()
@@ -222,7 +223,7 @@ def main():
         x = input("\nUpgrade to new BIOS image?")
         x = x.lower()
         if x == "yes":
-            upload_image_payload(bios_filename_r340, bios_location_r340, args.idrac, args.username, args.password)
+            upload_image_payload(biosfile, "/R340", args.idrac, args.username, args.password)
             install_image_payload(args.idrac, args.username, args.password)
             print("Appliance rebooting and applying new BIOS firmware")
             sys.exit()
@@ -231,7 +232,7 @@ def main():
         x = input("\nUpgrade to new BIOS image?")
         x = x.lower()
         if x == "yes":
-            upload_image_payload(bios_filename_r640, bios_location_r640, args.idrac, args.username, args.password)
+            upload_image_payload(biosfile, "/R640", args.idrac, args.username, args.password)
             install_image_payload(args.idrac, args.username, args.password)
             print("Appliance rebooting and applying new BIOS firmware")
             sys.exit()
