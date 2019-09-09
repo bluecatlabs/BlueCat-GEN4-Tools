@@ -129,7 +129,9 @@ Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management)
 Before running the firmwareupdate.py tool
 
 Create the following folders; IDRAC, R640 and R340 in the source directory where the tool in being run.
- 
+
+[GitHub](http://github.com)
+
 Download the latest R640 BIOS to the R640 folder 
 
 http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS
