@@ -1,3 +1,4 @@
+"""firmwareupdate.py"""
 # _author_ = Brian Shorland <bshorland@bluecatnetworks.com>
 # _version_ = 1.03
 
@@ -34,7 +35,8 @@ def check_supported_idrac_version(idrac, username, password):
     try:
         for i in data[u'Actions'][u'#UpdateService.SimpleUpdate'][u'TransferProtocol@Redfish.AllowableValues']:
             return True
-    except:
+    except Exception as myexception:
+        print(myexception)
         print("\n- WARNING - iDRAC version does not support the SimpleUpdate REDFISH method")
         return False
 
