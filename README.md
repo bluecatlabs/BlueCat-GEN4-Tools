@@ -1,10 +1,11 @@
 ![alt text](logo.png "BlueCat Logo")
 
-# GEN4 Appliance Fingerprinting
-Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
+Samples tools for remotely fingerprinting BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
 
-This is a community offering and as such it provided without support, this software is provided on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+This is a community offering on BlueCat labs and as such it provided without support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+# GEN4 Appliance Fingerprinting (gen4.py)
+Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
 
 ## Usage
 
@@ -120,6 +121,40 @@ eth3           00-0A-F7-BF-AE-6D  LinkUp
 }
 ```
 > NOTE :- IP Address and Network Mask will only be populated if the Dell iSM (iDRAC service module) is deployed and appliance is running
+
+# GEN4 Remote BIOS/idrac firmware update (firmwareupdate.py)
+Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) can remotely update the BIOS and IDRAC firmware.
+
+## Prerequisite
+Before running the firmwareupdate.py tool
+
+1. Ensure the following folders are created in the source directory; IDRAC, R640 and R340 
+
+2. Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
+
+:arrow_down: [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
+
+3. Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
+
+:arrow_down: [R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
+
+4. Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
+
+:arrow_down: [iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
+
+> NOTE :- When downloading the latest BIOS/iDRAC firmware always selects the .EXE version
+
+## Usage
+
+```
+python3 firmwareupdate.py [-h] idrac username password
+
+idrac       IP Addresss of the GEN4 appliance iDRAC
+username    iDRAC username
+password    iDRAC password
+-h, --help  show this help message and exit
+```
+
 
 ## Contributing
 
