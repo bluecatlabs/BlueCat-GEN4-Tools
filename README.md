@@ -157,6 +157,38 @@ password    iDRAC password
 
 > NOTE :- If the download BIOS/idrac firmware can be upgraded you must enter YES or yes to confirm
 
+## Example output
+```
+BlueCat Appliance Model: BlueCat GEN4-2000
+SystemID LFC: 8e29
+SystemID SYS: 0x88e
+Chassis Model: R340
+
+Available BIOS/iDRAC Release
+BIOS Release:  1.2.0
+BIOS File:  BIOS_76NP7_WN64_1.2.0.EXE
+BIOS Release:  3.34.34.34
+BIOS File:  iDRAC-with-Lifecycle-Controller_Firmware_3HT97_WN64_3.34.34.34_A00.EXE
+
+Current BIOS/iDRAC Release
+iDRAC version: 3.34.34.34 (CURRENT)
+BIOS release: 1.0.2 (OLD)
+BIOS release date:  11/26/2018
+Can be upgraded to BIOS 1.2.0
+
+Upgrade to new BIOS image?yes
+
+Uploading "BIOS_76NP7_WN64_1.2.0.EXE" firmware payload to iDRAC
+
+Uploaded firmware payload to iDRAC
+Firmware version of uploaded payload is: 1.2.0
+
+Creating firmware update job ID
+JID_680244344194 firmware update job ID successfully created
+Appliance rebooting and applying new BIOS firmware
+```
+
+
 ## Contributing
 
 1. Fork it!
