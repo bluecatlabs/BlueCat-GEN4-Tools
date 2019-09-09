@@ -2,11 +2,10 @@
 
 Provides samples tools for remotely fingerprint BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
 
-# GEN4 Appliance Fingerprinting
-Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
+This is a community offering on BlueCat labs and as such it provided without support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-This is a community offering and as such it provided without support, this software is provided on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# GEN4 Appliance Fingerprinting (gen4.py)
+Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
 
 ## Usage
 
@@ -123,8 +122,17 @@ eth3           00-0A-F7-BF-AE-6D  LinkUp
 ```
 > NOTE :- IP Address and Network Mask will only be populated if the Dell iSM (iDRAC service module) is deployed and appliance is running
 
-# GEN4 Remote BIOS/idrac firmware update
+# GEN4 Remote BIOS/idrac firmware update (firmwareupdate.py)
 Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) can remotely update the BIOS and IDRAC firmware.
+
+## Prerequists
+Before running the firmwareupdate.py tool
+
+Create the following folders; IDRAC, R640 and R340 in the source directory where the tool in being run.
+ 
+Download the latest R640 BIOS to the R640 folder http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS
+Download the latest R340 BIOS to the R340 folder http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS
+Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller
 
 ## Usage
 
