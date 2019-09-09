@@ -1,8 +1,9 @@
 ![alt text](logo.png "BlueCat Logo")
 
-Samples tools for remotely fingerprinting BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
+Samples tools for remotely fingerprinting and upgrading the BIOS/idrac firmware on BlueCat GEN4 appliances
 
-This is a community offering on BlueCat labs and as such it provided without support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+**This is a community offering on BlueCat labs and as such it provided without formal support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Flashing BIOS/iDRAC remotely is an invasive task and should be fully tested before using in production environments.**
 
 # GEN4 Appliance Fingerprinting (gen4.py)
 Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
@@ -132,15 +133,15 @@ Before running the firmwareupdate.py tool
 
 2. Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
 
-:arrow_down: [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
+  :arrow_down: [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
 
 3. Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
 
-:arrow_down: [R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
+  :arrow_down: [R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
 
 4. Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
 
-:arrow_down: [iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
+  :arrow_down: [iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
 
 > NOTE :- When downloading the latest BIOS/iDRAC firmware always selects the .EXE version
 
@@ -153,6 +154,39 @@ idrac       IP Addresss of the GEN4 appliance iDRAC
 username    iDRAC username
 password    iDRAC password
 -h, --help  show this help message and exit
+```
+
+> NOTE :- If the download BIOS/idrac firmware can be upgraded you must enter YES or yes to confirm
+
+## Example output
+```
+BlueCat Appliance Model: BlueCat GEN4-2000
+SystemID LFC: 8e29
+SystemID SYS: 0x88e
+Chassis Model: R340
+
+Available BIOS/iDRAC Release
+BIOS Release:  1.2.0
+BIOS File:  BIOS_76NP7_WN64_1.2.0.EXE
+BIOS Release:  3.34.34.34
+BIOS File:  iDRAC-with-Lifecycle-Controller_Firmware_3HT97_WN64_3.34.34.34_A00.EXE
+
+Current BIOS/iDRAC Release
+iDRAC version: 3.34.34.34 (CURRENT)
+BIOS release: 1.0.2 (OLD)
+BIOS release date:  11/26/2018
+Can be upgraded to BIOS 1.2.0
+
+Upgrade to new BIOS image?yes
+
+Uploading "BIOS_76NP7_WN64_1.2.0.EXE" firmware payload to iDRAC
+
+Uploaded firmware payload to iDRAC
+Firmware version of uploaded payload is: 1.2.0
+
+Creating firmware update job ID
+JID_680244344194 firmware update job ID successfully created
+Appliance rebooting and applying new BIOS firmware
 ```
 
 
@@ -171,6 +205,8 @@ v1.00 - Initial Release
 v1.01 - Improved SystemID detection, added BIOS release date and Service Express Code to output
 
 v1.02 - Added firmwareupdate.py POC to update any firmware payload via idrac9 redfish
+
+v1.03 - Adjust firmwareupdate.py to take filename and versions from the location folders instead of hardcoding releases
 
 ## Credits
 
