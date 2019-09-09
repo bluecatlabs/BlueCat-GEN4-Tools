@@ -1,5 +1,7 @@
 ![alt text](logo.png "BlueCat Logo")
 
+Provides samples tools for remotely fingerprint BlueCat GEN4 appliances and upgrading the BIOS/idrac firmware
+
 # GEN4 Appliance Fingerprinting
 Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
 
