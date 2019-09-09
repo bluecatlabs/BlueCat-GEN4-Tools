@@ -1,6 +1,6 @@
 ![alt text](logo.png "BlueCat Logo")
 
-Samples tools for remotely fingerprinting and upgrading the BIOS/idrac firmware on BlueCat GEN4 appliances
+Sample tools for remotely fingerprinting GEN4 appliances and upgrading the BIOS/idrac firmware
 
 
 **This is a community offering on BlueCat labs and as such it provided without formal support, this software is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Flashing BIOS/iDRAC remotely is an invasive task and should be fully tested before using in production environments.**
