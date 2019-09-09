@@ -155,6 +155,7 @@ password    iDRAC password
 -h, --help  show this help message and exit
 ```
 
+> NOTE :- If the download BIOS/idrac firmware can be upgraded you must enter YES or yes to confirm
 
 ## Contributing
 
