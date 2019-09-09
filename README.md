@@ -3,6 +3,9 @@
 # GEN4 Appliance Fingerprinting
 Utilising the REDFISH REST API upon the embedded iDRAC9 (Out of Band management) remotely scans any BlueCat GEN4 hardware appliance for various hardware configuration details
 
+This is a community offering and as such it provided without support, this software is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
 ## Usage
 
 ```
