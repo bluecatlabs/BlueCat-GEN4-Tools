@@ -132,17 +132,17 @@ Create the following folders; IDRAC, R640 and R340 in the source directory where
 
 
 
-Download the latest R640 BIOS to the R640 folder 
+Download the latest R640 BIOS to the R640 folder (For GEN4-7000 BDDS125/BAM7000)
 
 [R640 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20BIOS)
 
-Download the latest R340 BIOS to the R340 folder 
+Download the latest R340 BIOS to the R340 folder (For GEN4-2000/4000/5000 BDDS25/50/75 BAM5000)
 
-http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS
+[R340 BIOS](http://poweredgec.dell.com/latest_poweredge-14g.html#R340%20BIOS)
 
 Download the latest iDRAC9 with lifecycle controller firmware to the IDRAC folder 
 
-http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller
+[iDRAC9 firmware](http://poweredgec.dell.com/latest_poweredge-14g.html#R640%20iDRAC%20with%20Lifecycle%20controller)
 
 ## Usage
 
