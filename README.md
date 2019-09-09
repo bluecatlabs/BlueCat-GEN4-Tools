@@ -172,6 +172,8 @@ v1.01 - Improved SystemID detection, added BIOS release date and Service Express
 
 v1.02 - Added firmwareupdate.py POC to update any firmware payload via idrac9 redfish
 
+v1.03 - Adjust firmwareupdate.py to take filename and versions from the location folders instead of hardcoding releases
+
 ## Credits
 
 B.Shorland
