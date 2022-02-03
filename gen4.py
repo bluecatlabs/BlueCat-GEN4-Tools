@@ -1,6 +1,6 @@
 """gen4.py"""
 # _author_ = Brian Shorland <bshorland@bluecatnetworks.com>
-# _version_ = 1.03
+# _version_ = 1.04
 
 import json
 import argparse
@@ -30,6 +30,10 @@ def gen4_chassis_model(systemid):
 
 def parse_systemid(data):
     """Parse the SystemID,get BIOS/Express/SystemID"""
+    systemid = "Unknown";
+    dellchassis = "Unknown";
+    biosreleasedate = "Unknown";
+    expressservicecode = "Unknown";
     for i in data.items():
         if i[0] == u'@odata.id' or i[0] == u'@odata.context' or i[0] == u'Links' or i[0] == u'Actions' or i[0] == u'@odata.type' or i[0] == u'Description' or i[0] == u'EthernetInterfaces' or i[0] == u'Storage' or i[0] == u'Processors' or i[0] == u'Memory' or i[0] == u'SecureBoot' or i[0] == u'NetworkInterfaces' or i[0] == u'Bios' or i[0] == u'SimpleStorage' or i[0] == u'PCIeDevices' or i[0] == u'PCIeFunctions':
             pass
@@ -48,8 +52,6 @@ def parse_systemid(data):
         dellchassis = "R340"
     elif systemid == "0x716":
         dellchassis = "R640"
-    else:
-        dellchassis = "Unknown"
     return systemid, biosreleasedate, expressservicecode, dellchassis
 
 def appliance_nic_configs(idrac, username, password):
@@ -69,12 +71,22 @@ def appliance_nic_configs(idrac, username, password):
             # Get NIC in slot1
             response = requests.get('https://%s/redfish/v1/Chassis/System.Embedded.1/Assembly/NIC.Slot.1' % idrac, verify=False, auth=(username, password))
             data = response.json()
-            nic2 = data['Model']
+            if response:
+                nic2 = data['Model']
+            else:
+                response = requests.get('https://%s/redfish/v1/Chassis/System.Embedded.1/NetworkAdapters/NIC.Slot.1' % idrac, verify=False, auth=(username, password))
+                data = response.json()
+                nic2 = data['Model']
             # Get NIC in slot2
             response = requests.get('https://%s/redfish/v1/Chassis/System.Embedded.1/Assembly/NIC.Slot.2' % idrac, verify=False, auth=(username, password))
             data = response.json()
             try:
-                nic3 = data['Model']
+                if response:
+                   nic3 = data['Model']
+                else:
+                    response = requests.get('https://%s/redfish/v1/Chassis/System.Embedded.1/NetworkAdapters/NIC.Slot.2' % idrac, verify=False, auth=(username, password))
+                    data = response.json()
+                    nic3 = data['Model']
             except Exception as myexception:
                 # Handle exception is slot2 NIC not present
                 if 'not found' not in str(myexception).lower():
@@ -113,6 +125,9 @@ def main():
     systemgen = idracdata[u'Attributes'][u'Info.1.ServerGen']
 
     assembly = check_supported_idrac_version(args.idrac, args.username, args.password)
+    nic1 = "";
+    nic2 = "";
+    nic3 = "";
     if assembly:
         nic1, nic2, nic3 = appliance_nic_configs(args.idrac, args.username, args.password)
 
