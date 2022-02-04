@@ -208,13 +208,17 @@ v1.02 - Added firmwareupdate.py POC to update any firmware payload via idrac9 re
 
 v1.03 - Adjust firmwareupdate.py to take filename and versions from the location folders instead of hardcoding releases
 
+v1.04 - Fixed JSON return for null ethernet details being return under idrac 4.xx and 5.xx
+
+v1.05 - Fixed cprint table return for above
+
 ## Credits
 
 B.Shorland
 
 ## License
 
-Copyright 2019 BlueCat Networks, Inc.
+Copyright 2022 BlueCat Networks, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
