@@ -1,6 +1,6 @@
 """gen4.py"""
 # _author_ = Brian Shorland <bshorland@bluecatnetworks.com>
-# _version_ = 1.04
+# _version_ = 1.05
 
 import json
 import argparse
@@ -362,10 +362,9 @@ def main():
     cprint("{:<15}{:<18} {:<10}{:<16}{:<16} ".format("Port", "MAC", "Status", "IPv4 Address", "Network Mask"))
     cprint("{:<15}{:<18} {:<10}{:<16}{:<16} ".format("--------------", "-----------------", "---------", "---------------", "---------------"))
     for nic, details in d['Network Ports Rear'].items():
-        try:
+        if "ip" in details.keys():
             cprint("{:<15}{:<18} {:<10}{:<16}{:<16} ".format(nic, details['mac'], details['status'], details['ip'], details['mask']))
-        except:
+        if "mac" in details.keys():
             cprint("{:<15}{:<18} {:<10}{:<16}{:<16} ".format(nic, details['mac'], details['status'], "", ""))
-
-if __name__ == "__main__":
-    main()
+        else:
+            cprint("{:<15}{:<18} {:<10}{:<16}{:<16} ".format(nic, "NA", "NA", "NA", "NA"))
